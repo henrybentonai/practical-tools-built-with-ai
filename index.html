@@ -91,6 +91,7 @@
   }
   nav.site a:hover{ color: var(--moss-deep); }
   header.site.scrolled nav.site a{ margin-left: 14px; font-size: 0.85rem; }
+  nav.site a .short{ display: none; }
 
   @media (max-width: 640px){
     header.site .wrap{ flex-direction: column; align-items: flex-start; gap: 14px; }
@@ -100,9 +101,13 @@
     .nav-secondary{ display: none; }
     header.site{ padding: 18px 0; }
 
-    header.site.scrolled .wrap{ flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-    header.site.scrolled nav.site a{ margin-left: 0; font-size: 0.85rem; }
+    header.site.scrolled .wrap{ flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: nowrap; gap: 8px; }
+    header.site.scrolled nav.site{ gap: 4px 10px; }
+    header.site.scrolled nav.site a{ margin-left: 0; font-size: 0.78rem; }
+    header.site.scrolled nav.site a .full{ display: none; }
+    header.site.scrolled nav.site a .short{ display: inline; }
     header.site.scrolled{ padding: 8px 0; }
+    header.site.scrolled .brand-compact{ height: 22px; }
 
     .hero{ padding: 32px 0 24px; }
     .hero .lede{ margin-top: 14px; font-size: 1.02rem; }
@@ -324,10 +329,10 @@
       <img src="logo-header.svg" alt="Henry Benton" class="brand-compact">
     </div>
     <nav class="site">
-      <a href="#business">For your business</a>
-      <a href="#work">The work</a>
-      <a href="#how-it-works" class="nav-secondary">How it works</a>
-      <a href="#enquiry">Get in touch</a>
+      <a href="#business"><span class="full">For your business</span><span class="short">Business</span></a>
+      <a href="#work"><span class="full">The work</span><span class="short">Work</span></a>
+      <a href="#how-it-works" class="nav-secondary"><span class="full">How it works</span><span class="short">How it works</span></a>
+      <a href="#enquiry"><span class="full">Get in touch</span><span class="short">Contact</span></a>
     </nav>
   </div>
 </header>
