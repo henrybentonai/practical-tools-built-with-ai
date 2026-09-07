@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henry Benton — Practical AI-built tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F0ECE1;
+    --paper-2: #E6DFCE;
+    --ink: #22302B;
+    --ink-soft: #52605A;
+    --moss: #52713A;
+    --moss-deep: #3E5A2B;
+    --rust: #AD5A1E;
+    --line: #C6BEA6;
+    --line-soft: #D9D2BC;
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 42px 42px;
+    background-position: -1px -1px;
+  }
+
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; margin: 0; color: var(--ink); }
+
+  a { color: var(--moss-deep); }
+
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 28px; }
+
+  /* Header */
+  header.site{
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
+  .brand{ font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
+  .brand span{ color: var(--moss-deep); }
+  nav.site a{
+    margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
+  }
+  nav.site a:hover{ color: var(--moss-deep); }
+
+  /* Hero */
+  .hero{ padding: 72px 0 56px; }
+  .hero h1{
+    font-size: clamp(2rem, 5vw, 3.1rem);
+    line-height: 1.15;
+    max-width: 14ch;
+  }
+  .hero .lede{
+    max-width: 56ch;
+    margin-top: 22px;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+  }
+
+  /* Calculator widget */
+  .calc{
+    margin-top: 44px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    max-width: 560px;
+  }
+  .calc .calc-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--moss-deep);
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+  }
+  .calc h3{ font-size: 1.25rem; margin-bottom: 4px; }
+  .calc-row{
+    display:flex; align-items:center; gap: 16px; margin-top: 20px; flex-wrap: wrap;
+  }
+  .calc-row label{ font-size: 0.95rem; color: var(--ink-soft); min-width: 210px; }
+  input[type="range"]{
+    flex: 1; min-width: 160px; accent-color: var(--moss);
+  }
+  .calc-value{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight: 500;
+    min-width: 60px;
+    text-align: right;
+  }
+  .calc-output{
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+    font-size: 1.05rem;
+  }
+  .calc-output strong{
+    font-family:'Fraunces', serif;
+    font-size: 1.6rem;
+    color: var(--moss-deep);
+    font-weight: 600;
+  }
+
+  /* Sections */
+  section{ padding: 56px 0; }
+  section.divider{ border-top: 1px solid var(--line); }
+  .section-head{ margin-bottom: 36px; }
+  .section-head h2{ font-size: 1.7rem; }
+  .section-head p{ color: var(--ink-soft); margin-top: 8px; max-width: 58ch; }
+
+  /* Ledger rows */
+  .ledger{ border-top: 1px solid var(--line); }
+  .row{
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 18px;
+    cursor: pointer;
+  }
+  .row .tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--moss-deep);
+    text-transform: lowercase;
+    padding-top: 3px;
+  }
+  .row .content h3{ font-size: 1.15rem; margin-bottom: 6px; }
+  .row .content .stack{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    display: none;
+  }
+  .row .content p{ margin: 0; color: var(--ink-soft); }
+  .row.open .content .stack{ display: block; }
+  .row .expand-hint{
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 600px){
+    .row{ grid-template-columns: 1fr; gap: 6px; }
+    .row .tag{ padding-top: 0; }
+  }
+
+  /* Bridge section */
+  .bridge{
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 34px 36px;
+  }
+  .bridge h2{ font-size: 1.5rem; margin-bottom: 14px; }
+  .bridge p + p{ margin-top: 14px; }
+  .bridge .credential{
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  /* Enquiry form */
+  form.enquiry{
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 30px 32px;
+    max-width: 560px;
+  }
+  form.enquiry .field{
+    margin-bottom: 20px;
+  }
+  form.enquiry .field:last-of-type{ margin-bottom: 26px; }
+  form.enquiry label{
+    display: block;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  form.enquiry input,
+  form.enquiry textarea{
+    width: 100%;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    resize: vertical;
+  }
+  form.enquiry input:focus,
+  form.enquiry textarea:focus{
+    outline: none;
+    border-color: var(--moss);
+  }
+  form.enquiry button{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: var(--paper);
+    background: var(--moss-deep);
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 22px;
+    cursor: pointer;
+  }
+  form.enquiry button:hover{ background: var(--moss); }
+
+  /* Footer */
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 44px 0 60px;
+  }
+  footer h2{ font-size: 1.4rem; margin-bottom: 10px; }
+  footer p{ color: var(--ink-soft); max-width: 50ch; }
+  .contact-block{
+    margin-top: 22px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 0.92rem;
+    line-height: 1.9;
+  }
+  .contact-block a{ text-decoration: none; }
+  .note{
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    border-left: 2px solid var(--rust);
+    padding-left: 14px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">Henry <span>Benton</span></div>
+    <nav class="site">
+      <a href="#work">The work</a>
+      <a href="#business">For your business</a>
+      <a href="#enquiry">Get in touch</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>I build things that take work off people's plates.</h1>
+    <p class="lede">Nine years in software sales and renewals across defence, pharmaceutical and calibration lab customers taught me what actually slows a working day down. These days I use AI to build the fix, rather than just talk about it. Below are the tools I've already built, for a school, for my own household, and for previous employers.</p>
+
+    <div class="calc">
+      <div class="calc-label">a quick way to see it</div>
+      <h3>How much is one manual task actually costing you?</h3>
+      <div class="calc-row">
+        <label for="hours">Hours spent on it each week</label>
+        <input type="range" id="hours" min="1" max="20" value="4">
+        <span class="calc-value" id="hoursVal">4 hrs</span>
+      </div>
+      <div class="calc-output">
+        That's <strong id="yearVal">208</strong> hours a year, or roughly <span id="weeksVal">5.2</span> working weeks, spent on one task that could very likely be automated.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="divider">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>What I've built so far</h2>
+      <p>A working example is worth more than a promise. Everything below is live or has been used by real people, not a demo built to look good in a pitch. Tap a row for more detail.</p>
+    </div>
+
+    <div class="section-head" style="margin-bottom:14px;">
+      <h3 style="font-size:1.05rem; color:var(--ink-soft); font-weight:500;">Community — built for a primary school PTA</h3>
+    </div>
+    <div class="ledger">
+      <div class="row" data-row>
+        <div class="tag">[community]</div>
+        <div class="content">
+          <h3>Marketplace</h3>
+          <p>A simple space for parents to buy, sell and swap outgrown school kit, without a spreadsheet nobody updates or a Facebook thread nobody can search.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Built as a GitHub-hosted site with a Google Apps Script backend. No login accounts to manage, no ongoing hosting cost.</div>
+        </div>
+      </div>
+      <div class="row" data-row>
+        <div class="tag">[community]</div>
+        <div class="content">
+          <h3>Compliments tool</h3>
+          <p>A lightweight way for children and parents to send classroom shout-outs, replacing an informal system that previously lived nowhere in particular.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Google Apps Script bound to a Form and Sheet, with output surfaced somewhere staff and parents actually look.</div>
+        </div>
+      </div>
+      <div class="row" data-row>
+        <div class="tag">[community]</div>
+        <div class="content">
+          <h3>What's Happening tool</h3>
+          <p>One place for PTA events and updates, replacing the usual scatter of emails, paper flyers and group chat messages that get missed.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">GitHub-hosted site, content managed through Google Workspace so non-technical volunteers can update it without touching code.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin: 40px 0 14px;">
+      <h3 style="font-size:1.05rem; color:var(--ink-soft); font-weight:500;">Home — built for my own household</h3>
+    </div>
+    <div class="ledger">
+      <div class="row" data-row>
+        <div class="tag">[home]</div>
+        <div class="content">
+          <h3>Home dashboard</h3>
+          <p>One screen for the household: a WiFi QR code for guests, chores and pocket money tracking, spelling and numbers practice games for the kids, and the family calendar.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Single Apps Script project bound to Sheets, built with future-proofing in mind so it keeps working without regular maintenance.</div>
+        </div>
+      </div>
+      <div class="row" data-row>
+        <div class="tag">[home, in progress]</div>
+        <div class="content">
+          <h3>Virtual pantry</h3>
+          <p>Scan what's in the cupboard, then build a menu and shopping list from what's actually there, instead of from what's easiest to remember.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Currently in progress. Google Workspace backend, focused on staying usable for non-technical family members.</div>
+        </div>
+      </div>
+      <div class="row" data-row>
+        <div class="tag">[home]</div>
+        <div class="content">
+          <h3>Two for Joy Trail</h3>
+          <p>A small game built for a 10th wedding anniversary. Not business-relevant, but a good example of building something with a Firebase backend end to end.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Firebase-backed, built as a one-off rather than an ongoing tool.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin: 40px 0 14px;">
+      <h3 style="font-size:1.05rem; color:var(--ink-soft); font-weight:500;">Professional — built in a previous sales role</h3>
+    </div>
+    <div class="ledger">
+      <div class="row" data-row>
+        <div class="tag">[professional]</div>
+        <div class="content">
+          <h3>HubSpot automations</h3>
+          <p>A set of workflow builds used to cut down manual admin around customer renewals, freeing up time for the actual conversations that keep accounts.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Built inside HubSpot's native workflow tooling, tailored to a renewals-focused sales process.</div>
+        </div>
+      </div>
+      <div class="row" data-row>
+        <div class="tag">[professional]</div>
+        <div class="content">
+          <h3>Calibration market tracker</h3>
+          <p>An automated watch on the top and bottom ten companies in a niche industry, flagging funding changes, leadership moves, data breaches or signs of customer dissatisfaction, straight to a Slack channel.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Scheduled Apps Script pulling from public sources, posting flagged signals directly to Slack for the sales team.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="business" class="divider">
+  <div class="wrap">
+    <div class="bridge">
+      <h2>What this means for your business</h2>
+      <p>None of the projects above were built to impress. They were built because something was slow, scattered, or relied on one person remembering to do it. That's usually exactly what's going on inside a small business too: a manual process, a spreadsheet only one person understands, or a customer question that gets answered from scratch every time.</p>
+      <p>I don't start with "let's use AI." I start with the actual bottleneck, then build the smallest thing that fixes it, in a way that someone on your team who isn't technical can still run without me.</p>
+      <div class="credential">Seven years selling and supporting software into defence, pharmaceutical, aerospace and calibration lab customers also means I don't treat data protection as an afterthought, which matters the moment any tool touches customer information.</div>
+    </div>
+  </div>
+</section>
+
+<section id="enquiry" class="divider">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Tell me what's slowing you down</h2>
+      <p>Fill this in and it'll open a pre-filled email in your own mail app, ready to send. Nothing is submitted or stored anywhere in between.</p>
+    </div>
+    <form class="enquiry" id="enquiryForm">
+      <div class="field">
+        <label for="enqName">Your name</label>
+        <input type="text" id="enqName" required>
+      </div>
+      <div class="field">
+        <label for="enqBusiness">Business (optional)</label>
+        <input type="text" id="enqBusiness">
+      </div>
+      <div class="field">
+        <label for="enqIssue">What's the issue?</label>
+        <textarea id="enqIssue" rows="5" required placeholder="e.g. we spend hours a week manually chasing quotes"></textarea>
+      </div>
+      <button type="submit">Open enquiry in email</button>
+    </form>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Or reach me directly</h2>
+    <p>If something above looks like a problem your business also has, I'd be glad to have a conversation about it. No obligation, just a chat about where the time is going.</p>
+    <div class="contact-block">
+      <div>henrybentonai@gmail.com</div>
+      <div>07584 419392</div>
+    </div>
+    <div class="note">Build note: add real screenshots or links for each project before sending this out. This page is set up to be hosted for free on GitHub Pages.</div>
+  </div>
+</footer>
+
+<script>
+  const hoursInput = document.getElementById('hours');
+  const hoursVal = document.getElementById('hoursVal');
+  const yearVal = document.getElementById('yearVal');
+  const weeksVal = document.getElementById('weeksVal');
+
+  function updateCalc(){
+    const h = parseInt(hoursInput.value, 10);
+    hoursVal.textContent = h + ' hrs';
+    const yearly = h * 52;
+    yearVal.textContent = yearly.toLocaleString();
+    weeksVal.textContent = (yearly / 40).toFixed(1);
+  }
+  hoursInput.addEventListener('input', updateCalc);
+  updateCalc();
+
+  document.querySelectorAll('[data-row]').forEach(row => {
+    row.addEventListener('click', () => row.classList.toggle('open'));
+  });
+
+  document.getElementById('enquiryForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('enqName').value.trim();
+    const business = document.getElementById('enqBusiness').value.trim();
+    const issue = document.getElementById('enqIssue').value.trim();
+
+    const subject = 'Enquiry from ' + name + (business ? ' (' + business + ')' : '');
+    const bodyLines = [];
+    if (business) bodyLines.push('Business: ' + business);
+    bodyLines.push('');
+    bodyLines.push(issue);
+    bodyLines.push('');
+    bodyLines.push('— ' + name);
+
+    const mailto = 'mailto:henrybentonai@gmail.com'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+
+    window.location.href = mailto;
+  });
+</script>
+
+</body>
+</html>
