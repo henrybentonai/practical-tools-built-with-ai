@@ -76,11 +76,12 @@
     border-bottom: 1px solid var(--line);
     background: var(--paper);
     transition: padding 0.2s ease;
+    overflow-anchor: none;
   }
   header.site.scrolled{ padding: 8px 0; }
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
   .brand{ display:flex; align-items:center; }
-  .brand-full{ height: 60px; width: auto; display: block; }
+  .brand-full{ height: 78px; width: auto; display: block; }
   .brand-compact{ height: 26px; width: auto; display: none; }
   header.site.scrolled .brand-full{ display: none; }
   header.site.scrolled .brand-compact{ display: block; }
@@ -97,7 +98,9 @@
     nav.site a{ margin-left: 0; }
     header.site.scrolled nav.site a{ margin-left: 0; }
     header.site{ padding: 18px 0; }
-    .brand-full{ height: 46px; }
+    .brand-full{ height: 58px; }
+    header.site.scrolled .wrap{ gap: 0; }
+    header.site.scrolled .brand{ display: none; }
     .nav-secondary{ display: none; }
     .hero{ padding: 32px 0 24px; }
     .hero .lede{ margin-top: 14px; font-size: 1.02rem; }
