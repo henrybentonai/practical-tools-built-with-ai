@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Henry Benton — Practical AI-built tools</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -51,7 +52,8 @@
     background: var(--paper);
   }
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
-  .brand{ font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
+  .brand{ display:flex; align-items:center; gap: 12px; font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
+  .brand-mark{ height: 36px; width: auto; display: block; }
   .brand span{ color: var(--moss-deep); }
   nav.site a{
     margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
@@ -253,7 +255,7 @@
 
 <header class="site">
   <div class="wrap">
-    <div class="brand">Henry <span>Benton</span></div>
+    <div class="brand"><img src="logo-mark.svg" alt="" class="brand-mark">Henry <span>Benton</span></div>
     <nav class="site">
       <a href="#work">The work</a>
       <a href="#business">For your business</a>
