@@ -36,7 +36,7 @@
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-anchor: none; }
 
   body{
     margin:0;
@@ -87,7 +87,7 @@
   header.site.scrolled .brand-compact{ display: block; }
   nav.site a{
     margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
-    transition: margin-left 0.2s ease, font-size 0.2s ease;
+    transition: margin-left 0.2s ease;
   }
   nav.site a:hover{ color: var(--moss-deep); }
   header.site.scrolled nav.site a{ margin-left: 14px; font-size: 0.85rem; }
