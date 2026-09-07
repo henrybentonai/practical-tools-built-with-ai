@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Henry Benton — Practical AI-built tools</title>
+<meta name="description" content="Practical tools built with AI, already working in a school, at home, and in a previous sales role. See what's real before deciding if it fits your business.">
+
+<!-- Link preview tags: replace the domain below with your actual GitHub Pages URL once confirmed -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Henry Benton — Practical AI-built tools">
+<meta property="og:description" content="Practical tools built with AI, already working in a school, at home, and in a previous sales role.">
+<meta property="og:url" content="https://henrybentonai.github.io/practical-tools-built-with-ai/">
+<meta property="og:image" content="https://henrybentonai.github.io/practical-tools-built-with-ai/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Henry Benton — Practical AI-built tools">
+<meta name="twitter:description" content="Practical tools built with AI, already working in a school, at home, and in a previous sales role.">
+<meta name="twitter:image" content="https://henrybentonai.github.io/practical-tools-built-with-ai/og-image.png">
+
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,13 +60,19 @@
 
   /* Header */
   header.site{
+    position: sticky;
+    top: 0;
+    z-index: 100;
     padding: 28px 0;
     border-bottom: 1px solid var(--line);
     background: var(--paper);
+    transition: padding 0.2s ease;
   }
+  header.site.scrolled{ padding: 12px 0; }
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
   .brand{ display:flex; align-items:center; gap: 12px; font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
-  .brand-mark{ height: 50px; width: auto; display: block; }
+  .brand-mark{ height: 50px; width: auto; display: block; transition: height 0.2s ease; }
+  header.site.scrolled .brand-mark{ height: 32px; }
   .brand .accent{ color: var(--moss-deep); }
   nav.site a{
     margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
@@ -420,7 +439,7 @@
       <h2>Tell me what's slowing you down</h2>
       <p>Fill this in and it'll be sent straight across to me, no email app needed.</p>
     </div>
-    <form class="enquiry" id="enquiryForm" action="https://formspree.io/f/mwlkrazv" method="POST">
+    <form class="enquiry" id="enquiryForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="hidden" name="_subject" value="New enquiry from the portfolio site">
       <div class="field">
         <label for="enqName">Your name</label>
@@ -482,6 +501,11 @@
 
   document.querySelectorAll('[data-row]').forEach(row => {
     row.addEventListener('click', () => row.classList.toggle('open'));
+  });
+
+  const stickyHeader = document.querySelector('header.site');
+  window.addEventListener('scroll', () => {
+    stickyHeader.classList.toggle('scrolled', window.scrollY > 40);
   });
 
   document.getElementById('enquiryForm').addEventListener('submit', async function(e){
