@@ -54,7 +54,7 @@
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
   .brand{ display:flex; align-items:center; gap: 12px; font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
   .brand-mark{ height: 50px; width: auto; display: block; }
-  .brand span{ color: var(--moss-deep); }
+  .brand .accent{ color: var(--moss-deep); }
   nav.site a{
     margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
   }
@@ -64,6 +64,10 @@
     header.site .wrap{ flex-direction: column; align-items: flex-start; gap: 14px; }
     nav.site{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
     nav.site a{ margin-left: 0; }
+    header.site{ padding: 18px 0; }
+    .hero{ padding: 32px 0 24px; }
+    .hero .lede{ margin-top: 14px; font-size: 1.02rem; }
+    .calc{ margin-top: 26px; padding: 22px 20px; }
   }
 
   /* Hero */
@@ -233,6 +237,11 @@
     cursor: pointer;
   }
   form.enquiry button:hover{ background: var(--moss); }
+  .form-status{
+    margin-top: 16px;
+    font-size: 0.92rem;
+    min-height: 1.2em;
+  }
 
   /* Footer */
   footer{
@@ -261,7 +270,7 @@
 
 <header class="site">
   <div class="wrap">
-    <div class="brand"><img src="logo-header.svg" alt="" class="brand-mark">Henry <span>Benton</span></div>
+    <div class="brand"><img src="logo-header.svg" alt="" class="brand-mark"><span>Henry <span class="accent">Benton</span></span></div>
     <nav class="site">
       <a href="#business">For your business</a>
       <a href="#work">The work</a>
@@ -273,7 +282,7 @@
 <section class="hero">
   <div class="wrap">
     <h1>I build things that take work off people's plates.</h1>
-    <p class="lede">Nine years in software sales and renewals across defence, pharmaceutical and calibration lab customers taught me what actually slows a working day down. These days I use AI to build the fix, rather than just talk about it. Below are the tools I've already built, for a school, for my own household, and for previous employers.</p>
+    <p class="lede">Seven years in software sales and renewals across defence, pharmaceutical and calibration lab customers taught me what actually slows a working day down. These days I use AI to build the fix, rather than just talk about it. Below are the tools I've already built, for a school, for my own household, and for previous employers.</p>
 
     <div class="calc">
       <div class="calc-label">a quick way to see it</div>
@@ -283,8 +292,13 @@
         <input type="range" id="hours" min="1" max="20" value="4">
         <span class="calc-value" id="hoursVal">4 hrs</span>
       </div>
+      <div class="calc-row">
+        <label for="rate">Roughly what that hour costs (£)</label>
+        <input type="range" id="rate" min="10" max="100" step="5" value="25">
+        <span class="calc-value" id="rateVal">£25/hr</span>
+      </div>
       <div class="calc-output">
-        That's <strong id="yearVal">208</strong> hours a year, or roughly <span id="weeksVal">5.2</span> working weeks, spent on one task that could very likely be automated.
+        That's <strong id="yearVal">208</strong> hours a year, roughly <span id="weeksVal">5.2</span> working weeks, and could be costing around <strong id="costVal">£5,200</strong> a year, on one task that could very likely be automated.
       </div>
     </div>
   </div>
@@ -309,6 +323,30 @@
     </div>
 
     <div class="section-head" style="margin-bottom:14px;">
+      <h3 style="font-size:1.05rem; color:var(--ink-soft); font-weight:500;">Professional — built in a previous sales role</h3>
+    </div>
+    <div class="ledger">
+      <div class="row" data-row>
+        <div class="tag">[professional]</div>
+        <div class="content">
+          <h3>HubSpot automations</h3>
+          <p>A set of workflow builds used to cut down manual admin around customer renewals, freeing up time for the actual conversations that keep accounts.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Built inside HubSpot's native workflow tooling, tailored to a renewals-focused sales process.</div>
+        </div>
+      </div>
+      <div class="row" data-row>
+        <div class="tag">[professional]</div>
+        <div class="content">
+          <h3>Calibration market tracker</h3>
+          <p>An automated watch on the top and bottom ten companies in a niche industry, flagging funding changes, leadership moves, data breaches or signs of customer dissatisfaction, straight to a Slack channel.</p>
+          <div class="expand-hint">Tap for build detail</div>
+          <div class="stack">Scheduled Apps Script pulling from public sources, posting flagged signals directly to Slack for the sales team.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin: 40px 0 14px;">
       <h3 style="font-size:1.05rem; color:var(--ink-soft); font-weight:500;">Community — built for a primary school PTA</h3>
     </div>
     <div class="ledger">
@@ -373,30 +411,6 @@
         </div>
       </div>
     </div>
-
-    <div class="section-head" style="margin: 40px 0 14px;">
-      <h3 style="font-size:1.05rem; color:var(--ink-soft); font-weight:500;">Professional — built in a previous sales role</h3>
-    </div>
-    <div class="ledger">
-      <div class="row" data-row>
-        <div class="tag">[professional]</div>
-        <div class="content">
-          <h3>HubSpot automations</h3>
-          <p>A set of workflow builds used to cut down manual admin around customer renewals, freeing up time for the actual conversations that keep accounts.</p>
-          <div class="expand-hint">Tap for build detail</div>
-          <div class="stack">Built inside HubSpot's native workflow tooling, tailored to a renewals-focused sales process.</div>
-        </div>
-      </div>
-      <div class="row" data-row>
-        <div class="tag">[professional]</div>
-        <div class="content">
-          <h3>Calibration market tracker</h3>
-          <p>An automated watch on the top and bottom ten companies in a niche industry, flagging funding changes, leadership moves, data breaches or signs of customer dissatisfaction, straight to a Slack channel.</p>
-          <div class="expand-hint">Tap for build detail</div>
-          <div class="stack">Scheduled Apps Script pulling from public sources, posting flagged signals directly to Slack for the sales team.</div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -404,22 +418,28 @@
   <div class="wrap">
     <div class="section-head">
       <h2>Tell me what's slowing you down</h2>
-      <p>Fill this in and it'll open a pre-filled email in your own mail app, ready to send. Nothing is submitted or stored anywhere in between.</p>
+      <p>Fill this in and it'll be sent straight across to me, no email app needed.</p>
     </div>
-    <form class="enquiry" id="enquiryForm">
+    <form class="enquiry" id="enquiryForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="hidden" name="_subject" value="New enquiry from the portfolio site">
       <div class="field">
         <label for="enqName">Your name</label>
-        <input type="text" id="enqName" required>
+        <input type="text" id="enqName" name="name" required>
+      </div>
+      <div class="field">
+        <label for="enqEmail">Your email</label>
+        <input type="email" id="enqEmail" name="email" required>
       </div>
       <div class="field">
         <label for="enqBusiness">Business (optional)</label>
-        <input type="text" id="enqBusiness">
+        <input type="text" id="enqBusiness" name="business">
       </div>
       <div class="field">
         <label for="enqIssue">What's the issue?</label>
-        <textarea id="enqIssue" rows="5" required placeholder="e.g. we spend hours a week manually chasing quotes"></textarea>
+        <textarea id="enqIssue" name="message" rows="5" required placeholder="e.g. we spend hours a week manually chasing quotes"></textarea>
       </div>
-      <button type="submit">Open enquiry in email</button>
+      <button type="submit">Send enquiry</button>
+      <p class="form-status" id="formStatus"></p>
     </form>
   </div>
 </section>
@@ -433,49 +453,60 @@
       <div>07584 419392</div>
     </div>
     <p class="tagline" style="margin-top:14px; font-size:0.95rem;">Some people have taken to calling me the nice AI guy. I'll happily answer to that too.</p>
-    <div class="note">Build note: add real screenshots or links for each project before sending this out. This page is set up to be hosted for free on GitHub Pages.</div>
+    <div class="note">Build note: the school and home projects are described here in text only, on purpose, since they're not appropriate to link to publicly. If future client work produces something shareable, that's the natural place to add a screenshot or two.</div>
   </div>
 </footer>
 
 <script>
   const hoursInput = document.getElementById('hours');
   const hoursVal = document.getElementById('hoursVal');
+  const rateInput = document.getElementById('rate');
+  const rateVal = document.getElementById('rateVal');
   const yearVal = document.getElementById('yearVal');
   const weeksVal = document.getElementById('weeksVal');
+  const costVal = document.getElementById('costVal');
 
   function updateCalc(){
     const h = parseInt(hoursInput.value, 10);
+    const r = parseInt(rateInput.value, 10);
     hoursVal.textContent = h + ' hrs';
+    rateVal.textContent = '£' + r + '/hr';
     const yearly = h * 52;
     yearVal.textContent = yearly.toLocaleString();
     weeksVal.textContent = (yearly / 40).toFixed(1);
+    costVal.textContent = '£' + (yearly * r).toLocaleString();
   }
   hoursInput.addEventListener('input', updateCalc);
+  rateInput.addEventListener('input', updateCalc);
   updateCalc();
 
   document.querySelectorAll('[data-row]').forEach(row => {
     row.addEventListener('click', () => row.classList.toggle('open'));
   });
 
-  document.getElementById('enquiryForm').addEventListener('submit', function(e){
+  document.getElementById('enquiryForm').addEventListener('submit', async function(e){
     e.preventDefault();
-    const name = document.getElementById('enqName').value.trim();
-    const business = document.getElementById('enqBusiness').value.trim();
-    const issue = document.getElementById('enqIssue').value.trim();
+    const form = e.target;
+    const status = document.getElementById('formStatus');
+    const data = new FormData(form);
 
-    const subject = 'Enquiry from ' + name + (business ? ' (' + business + ')' : '');
-    const bodyLines = [];
-    if (business) bodyLines.push('Business: ' + business);
-    bodyLines.push('');
-    bodyLines.push(issue);
-    bodyLines.push('');
-    bodyLines.push('— ' + name);
-
-    const mailto = 'mailto:henrybentonai@gmail.com'
-      + '?subject=' + encodeURIComponent(subject)
-      + '&body=' + encodeURIComponent(bodyLines.join('\n'));
-
-    window.location.href = mailto;
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        form.reset();
+        status.textContent = "Thanks, that's on its way. I'll get back to you shortly.";
+        status.style.color = 'var(--moss-deep)';
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      status.textContent = "Something went wrong sending that. You can email me directly at henrybentonai@gmail.com instead.";
+      status.style.color = 'var(--rust)';
+    }
   });
 </script>
 
