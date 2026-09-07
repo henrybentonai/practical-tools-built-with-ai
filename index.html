@@ -80,7 +80,7 @@
   }
   header.site.scrolled{ padding: 8px 0; }
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
-  .brand{ display:flex; align-items:center; }
+  .brand{ display:flex; align-items:center; text-decoration: none; cursor: pointer; }
   .brand-full{ height: 78px; width: auto; display: block; }
   .brand-compact{ height: 26px; width: auto; display: none; }
   header.site.scrolled .brand-full{ display: none; }
@@ -106,6 +106,7 @@
     header.site.scrolled nav.site a{ margin-left: 0; font-size: 0.78rem; }
     header.site.scrolled nav.site a .full{ display: none; }
     header.site.scrolled nav.site a .short{ display: inline; }
+    header.site.scrolled .nav-secondary{ display: inline; }
     header.site.scrolled{ padding: 8px 0; }
     header.site.scrolled .brand-compact{ height: 22px; }
 
@@ -311,6 +312,7 @@
     line-height: 1.9;
   }
   .contact-block a{ text-decoration: none; }
+  .contact-block a:hover{ text-decoration: underline; }
   .note{
     margin-top: 30px;
     font-size: 0.85rem;
@@ -324,14 +326,14 @@
 
 <header class="site">
   <div class="wrap">
-    <div class="brand">
+    <a href="#" class="brand" id="brandLink">
       <img src="logo-horizontal.svg" alt="Henry Benton — practical tools, built with ai" class="brand-full">
       <img src="logo-header.svg" alt="Henry Benton" class="brand-compact">
-    </div>
+    </a>
     <nav class="site">
       <a href="#business"><span class="full">For your business</span><span class="short">Business</span></a>
       <a href="#work"><span class="full">The work</span><span class="short">Work</span></a>
-      <a href="#how-it-works" class="nav-secondary"><span class="full">How it works</span><span class="short">How it works</span></a>
+      <a href="#how-it-works" class="nav-secondary"><span class="full">How it works</span><span class="short">Process</span></a>
       <a href="#enquiry"><span class="full">Get in touch</span><span class="short">Contact</span></a>
     </nav>
   </div>
@@ -566,8 +568,8 @@
     <h2>Or reach me directly</h2>
     <p>If something above looks like a problem your business also has, I'd be glad to have a conversation about it. No obligation, just a chat about where the time is going.</p>
     <div class="contact-block">
-      <div>henrybentonai@gmail.com</div>
-      <div>07584 419392</div>
+      <div><a href="mailto:henrybentonai@gmail.com">henrybentonai@gmail.com</a></div>
+      <div><a href="tel:07584419392">07584 419392</a></div>
     </div>
     <p class="tagline" style="margin-top:14px; font-size:0.95rem;">The nice AI guy.</p>
   </div>
@@ -621,6 +623,11 @@
       const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
       window.scrollTo({ top: targetTop, behavior: 'smooth' });
     });
+  });
+
+  document.getElementById('brandLink').addEventListener('click', function(e){
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   document.getElementById('enquiryForm').addEventListener('submit', async function(e){
