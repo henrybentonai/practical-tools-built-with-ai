@@ -54,6 +54,15 @@
 
   h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 500; margin: 0; color: var(--ink); }
 
+  .panel-alt{
+    background-color: var(--paper-2);
+    background-image:
+      linear-gradient(rgba(34, 48, 43, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 48, 43, 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    background-position: -1px -1px;
+  }
+
   a { color: var(--moss-deep); }
 
   .wrap{ max-width: 880px; margin: 0 auto; padding: 0 28px; }
@@ -70,21 +79,26 @@
   }
   header.site.scrolled{ padding: 8px 0; }
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
-  .brand{ display:flex; align-items:center; gap: 12px; font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
-  .brand-mark{ height: 50px; width: auto; display: block; transition: height 0.2s ease; }
-  header.site.scrolled .brand-mark{ height: 26px; }
-  header.site.scrolled .brand span{ display: none; }
-  .brand .accent{ color: var(--moss-deep); }
+  .brand{ display:flex; align-items:center; }
+  .brand-full{ height: 60px; width: auto; display: block; }
+  .brand-compact{ height: 26px; width: auto; display: none; }
+  header.site.scrolled .brand-full{ display: none; }
+  header.site.scrolled .brand-compact{ display: block; }
   nav.site a{
     margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
+    transition: margin-left 0.2s ease, font-size 0.2s ease;
   }
   nav.site a:hover{ color: var(--moss-deep); }
+  header.site.scrolled nav.site a{ margin-left: 14px; font-size: 0.85rem; }
 
   @media (max-width: 640px){
     header.site .wrap{ flex-direction: column; align-items: flex-start; gap: 14px; }
     nav.site{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
     nav.site a{ margin-left: 0; }
+    header.site.scrolled nav.site a{ margin-left: 0; }
     header.site{ padding: 18px 0; }
+    .brand-full{ height: 46px; }
+    .nav-secondary{ display: none; }
     .hero{ padding: 32px 0 24px; }
     .hero .lede{ margin-top: 14px; font-size: 1.02rem; }
     .calc{ margin-top: 26px; padding: 22px 20px; }
@@ -195,7 +209,7 @@
 
   /* Bridge section */
   .bridge{
-    background: var(--paper-2);
+    background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 34px 36px;
@@ -212,7 +226,7 @@
 
   /* Enquiry form */
   form.enquiry{
-    background: var(--paper-2);
+    background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 30px 32px;
@@ -300,11 +314,14 @@
 
 <header class="site">
   <div class="wrap">
-    <div class="brand"><img src="logo-header.svg" alt="" class="brand-mark"><span>Henry <span class="accent">Benton</span></span></div>
+    <div class="brand">
+      <img src="logo-horizontal.svg" alt="Henry Benton — practical tools, built with ai" class="brand-full">
+      <img src="logo-header.svg" alt="Henry Benton" class="brand-compact">
+    </div>
     <nav class="site">
       <a href="#business">For your business</a>
       <a href="#work">The work</a>
-      <a href="#how-it-works">How it works</a>
+      <a href="#how-it-works" class="nav-secondary">How it works</a>
       <a href="#enquiry">Get in touch</a>
     </nav>
   </div>
@@ -335,13 +352,13 @@
   </div>
 </section>
 
-<section id="business" class="divider">
+<section id="business" class="divider panel-alt">
   <div class="wrap">
     <div class="bridge">
       <h2>What this means for your business</h2>
       <p>The projects further down this page weren't built to impress. They were built because something was slow, scattered, or relied on one person remembering to do it. That's usually exactly what's going on inside a small business too: a manual process, a spreadsheet only one person understands, or a customer question that gets answered from scratch every time.</p>
       <p>I don't start with "let's use AI." I start with the actual bottleneck, then build the smallest thing that fixes it, in a way that someone on your team who isn't technical can still run without me.</p>
-      <div class="credential">Seven years selling and supporting software into defence, pharmaceutical, aerospace and calibration lab customers also means I don't treat data protection as an afterthought, which matters the moment any tool touches customer information.</div>
+      <div class="credential">That background in regulated industries also means I don't treat data protection as an afterthought, which matters the moment any tool touches customer information.</div>
     </div>
   </div>
 </section>
@@ -445,7 +462,7 @@
   </div>
 </section>
 
-<section id="how-it-works" class="divider">
+<section id="how-it-works" class="divider panel-alt">
   <div class="wrap">
     <div class="section-head">
       <h2>How this works</h2>
@@ -485,7 +502,7 @@
     <div class="faq">
       <div class="faq-item">
         <h3>Is my data safe if I share it with you?</h3>
-        <p>Seven years selling into defence, pharmaceutical and calibration lab customers means data protection isn't an afterthought. Anything built for your business is scoped with that in mind from the start.</p>
+        <p>It's factored into how a project is scoped from the outset, not bolted on afterwards. If a build touches customer information, that shapes the approach from day one, not something addressed once it's already built.</p>
       </div>
       <div class="faq-item">
         <h3>What if nobody on my team is technical?</h3>
@@ -499,15 +516,11 @@
         <h3>What if I don't know what to ask for?</h3>
         <p>That's usually the hardest part, and also the part I can help with. The first conversation is often what surfaces the actual bottleneck.</p>
       </div>
-      <div class="faq-item">
-        <h3>What happens to the information in the enquiry form?</h3>
-        <p>It goes straight to me, to reply to you. It isn't stored anywhere else or shared with anyone.</p>
-      </div>
     </div>
   </div>
 </section>
 
-<section id="enquiry" class="divider">
+<section id="enquiry" class="divider panel-alt">
   <div class="wrap">
     <div class="section-head">
       <h2>Tell me what's slowing you down</h2>
@@ -578,8 +591,15 @@
   });
 
   const stickyHeader = document.querySelector('header.site');
+  let headerCompact = false;
   window.addEventListener('scroll', () => {
-    stickyHeader.classList.toggle('scrolled', window.scrollY > 40);
+    if (!headerCompact && window.scrollY > 70) {
+      headerCompact = true;
+      stickyHeader.classList.add('scrolled');
+    } else if (headerCompact && window.scrollY < 30) {
+      headerCompact = false;
+      stickyHeader.classList.remove('scrolled');
+    }
   });
 
   document.querySelectorAll('nav.site a[href^="#"]').forEach(link => {
