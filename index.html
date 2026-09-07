@@ -68,11 +68,12 @@
     background: var(--paper);
     transition: padding 0.2s ease;
   }
-  header.site.scrolled{ padding: 12px 0; }
+  header.site.scrolled{ padding: 8px 0; }
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
   .brand{ display:flex; align-items:center; gap: 12px; font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
   .brand-mark{ height: 50px; width: auto; display: block; transition: height 0.2s ease; }
-  header.site.scrolled .brand-mark{ height: 32px; }
+  header.site.scrolled .brand-mark{ height: 26px; }
+  header.site.scrolled .brand span{ display: none; }
   .brand .accent{ color: var(--moss-deep); }
   nav.site a{
     margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
@@ -256,6 +257,16 @@
     cursor: pointer;
   }
   form.enquiry button:hover{ background: var(--moss); }
+  .form-privacy{ font-size: 0.82rem; color: var(--ink-soft); margin-top: 14px; max-width: 480px; }
+
+  /* Process steps (reuses ledger row styling, non-interactive) */
+  .row.static{ cursor: default; }
+
+  /* FAQ */
+  .faq-item{ padding: 20px 0; border-bottom: 1px solid var(--line); }
+  .faq-item:first-child{ border-top: 1px solid var(--line); }
+  .faq-item h3{ font-size: 1.05rem; margin-bottom: 8px; }
+  .faq-item p{ color: var(--ink-soft); margin: 0; }
   .form-status{
     margin-top: 16px;
     font-size: 0.92rem;
@@ -293,6 +304,7 @@
     <nav class="site">
       <a href="#business">For your business</a>
       <a href="#work">The work</a>
+      <a href="#how-it-works">How it works</a>
       <a href="#enquiry">Get in touch</a>
     </nav>
   </div>
@@ -433,6 +445,68 @@
   </div>
 </section>
 
+<section id="how-it-works" class="divider">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>How this works</h2>
+      <p>No lengthy sales process, no vague scope. Just three steps, in the order they actually happen.</p>
+    </div>
+    <div class="ledger">
+      <div class="row static">
+        <div class="tag">[step 1]</div>
+        <div class="content">
+          <h3>A quick conversation</h3>
+          <p>No pitch, no jargon. Just a chat about where your time is actually going and whether there's something worth fixing.</p>
+        </div>
+      </div>
+      <div class="row static">
+        <div class="tag">[step 2]</div>
+        <div class="content">
+          <h3>A small first build</h3>
+          <p>One problem, a fixed scope and a fixed fee, agreed before anything starts. Nothing open-ended.</p>
+        </div>
+      </div>
+      <div class="row static">
+        <div class="tag">[step 3]</div>
+        <div class="content">
+          <h3>A clear decision</h3>
+          <p>If it's genuinely saved you time, we talk about what's next. If it hasn't, there's no obligation to continue.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="divider">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Common questions</h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <h3>Is my data safe if I share it with you?</h3>
+        <p>Seven years selling into defence, pharmaceutical and calibration lab customers means data protection isn't an afterthought. Anything built for your business is scoped with that in mind from the start.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if nobody on my team is technical?</h3>
+        <p>That's normal, and expected. Everything I build is designed to be run by whoever's already doing the job, not by someone who understands how it works underneath.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What does it cost?</h3>
+        <p>That depends entirely on the problem, which is exactly why there's no fixed number on this page. What is fixed is the process: a first build with an agreed scope and fee, decided before anything starts.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if I don't know what to ask for?</h3>
+        <p>That's usually the hardest part, and also the part I can help with. The first conversation is often what surfaces the actual bottleneck.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What happens to the information in the enquiry form?</h3>
+        <p>It goes straight to me, to reply to you. It isn't stored anywhere else or shared with anyone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="enquiry" class="divider">
   <div class="wrap">
     <div class="section-head">
@@ -458,6 +532,7 @@
         <textarea id="enqIssue" name="message" rows="5" required placeholder="e.g. we spend hours a week manually chasing quotes"></textarea>
       </div>
       <button type="submit">Send enquiry</button>
+      <p class="form-privacy">Your details go straight to me via Formspree, to reply to your enquiry. They aren't stored anywhere else or shared with anyone.</p>
       <p class="form-status" id="formStatus"></p>
     </form>
   </div>
@@ -471,8 +546,7 @@
       <div>henrybentonai@gmail.com</div>
       <div>07584 419392</div>
     </div>
-    <p class="tagline" style="margin-top:14px; font-size:0.95rem;">Some people have taken to calling me the nice AI guy. I'll happily answer to that too.</p>
-    <div class="note">Build note: the school and home projects are described here in text only, on purpose, since they're not appropriate to link to publicly. If future client work produces something shareable, that's the natural place to add a screenshot or two.</div>
+    <p class="tagline" style="margin-top:14px; font-size:0.95rem;">The nice AI guy.</p>
   </div>
 </footer>
 
@@ -506,6 +580,17 @@
   const stickyHeader = document.querySelector('header.site');
   window.addEventListener('scroll', () => {
     stickyHeader.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  document.querySelectorAll('nav.site a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      const target = document.getElementById(this.getAttribute('href').slice(1));
+      if (!target) return;
+      const headerHeight = stickyHeader.offsetHeight;
+      const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 12;
+      window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    });
   });
 
   document.getElementById('enquiryForm').addEventListener('submit', async function(e){
