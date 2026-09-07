@@ -53,12 +53,18 @@
   }
   header.site .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap: wrap; gap: 10px; }
   .brand{ display:flex; align-items:center; gap: 12px; font-family:'Fraunces', serif; font-size: 1.25rem; font-weight: 600; }
-  .brand-mark{ height: 36px; width: auto; display: block; }
+  .brand-mark{ height: 50px; width: auto; display: block; }
   .brand span{ color: var(--moss-deep); }
   nav.site a{
     margin-left: 22px; text-decoration:none; color: var(--ink-soft); font-size:0.95rem;
   }
   nav.site a:hover{ color: var(--moss-deep); }
+
+  @media (max-width: 640px){
+    header.site .wrap{ flex-direction: column; align-items: flex-start; gap: 14px; }
+    nav.site{ display: flex; flex-wrap: wrap; gap: 8px 18px; }
+    nav.site a{ margin-left: 0; }
+  }
 
   /* Hero */
   .hero{ padding: 72px 0 56px; }
@@ -255,10 +261,10 @@
 
 <header class="site">
   <div class="wrap">
-    <div class="brand"><img src="logo-mark.svg" alt="" class="brand-mark">Henry <span>Benton</span></div>
+    <div class="brand"><img src="logo-header.svg" alt="" class="brand-mark">Henry <span>Benton</span></div>
     <nav class="site">
-      <a href="#work">The work</a>
       <a href="#business">For your business</a>
+      <a href="#work">The work</a>
       <a href="#enquiry">Get in touch</a>
     </nav>
   </div>
@@ -280,6 +286,17 @@
       <div class="calc-output">
         That's <strong id="yearVal">208</strong> hours a year, or roughly <span id="weeksVal">5.2</span> working weeks, spent on one task that could very likely be automated.
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="business" class="divider">
+  <div class="wrap">
+    <div class="bridge">
+      <h2>What this means for your business</h2>
+      <p>The projects further down this page weren't built to impress. They were built because something was slow, scattered, or relied on one person remembering to do it. That's usually exactly what's going on inside a small business too: a manual process, a spreadsheet only one person understands, or a customer question that gets answered from scratch every time.</p>
+      <p>I don't start with "let's use AI." I start with the actual bottleneck, then build the smallest thing that fixes it, in a way that someone on your team who isn't technical can still run without me.</p>
+      <div class="credential">Seven years selling and supporting software into defence, pharmaceutical, aerospace and calibration lab customers also means I don't treat data protection as an afterthought, which matters the moment any tool touches customer information.</div>
     </div>
   </div>
 </section>
@@ -383,17 +400,6 @@
   </div>
 </section>
 
-<section id="business" class="divider">
-  <div class="wrap">
-    <div class="bridge">
-      <h2>What this means for your business</h2>
-      <p>None of the projects above were built to impress. They were built because something was slow, scattered, or relied on one person remembering to do it. That's usually exactly what's going on inside a small business too: a manual process, a spreadsheet only one person understands, or a customer question that gets answered from scratch every time.</p>
-      <p>I don't start with "let's use AI." I start with the actual bottleneck, then build the smallest thing that fixes it, in a way that someone on your team who isn't technical can still run without me.</p>
-      <div class="credential">Seven years selling and supporting software into defence, pharmaceutical, aerospace and calibration lab customers also means I don't treat data protection as an afterthought, which matters the moment any tool touches customer information.</div>
-    </div>
-  </div>
-</section>
-
 <section id="enquiry" class="divider">
   <div class="wrap">
     <div class="section-head">
@@ -426,6 +432,7 @@
       <div>henrybentonai@gmail.com</div>
       <div>07584 419392</div>
     </div>
+    <p class="tagline" style="margin-top:14px; font-size:0.95rem;">Some people have taken to calling me the nice AI guy. I'll happily answer to that too.</p>
     <div class="note">Build note: add real screenshots or links for each project before sending this out. This page is set up to be hosted for free on GitHub Pages.</div>
   </div>
 </footer>
