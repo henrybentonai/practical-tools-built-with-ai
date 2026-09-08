@@ -539,8 +539,9 @@
       <h2>Tell me what's slowing you down</h2>
       <p>Fill this in and it'll be sent straight across to me, no email app needed.</p>
     </div>
-    <form class="enquiry" id="enquiryForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+    <form class="enquiry" id="enquiryForm" action="https://formspree.io/f/mwlkrazv" method="POST">
       <input type="hidden" name="_subject" value="New enquiry from the portfolio site">
+      <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off">
       <div class="field">
         <label for="enqName">Your name</label>
         <input type="text" id="enqName" name="name" required>
@@ -602,6 +603,11 @@
   document.querySelectorAll('[data-row]').forEach(row => {
     row.addEventListener('click', () => row.classList.toggle('open'));
   });
+
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+    window.scrollTo(0, 0);
+  }
 
   const stickyHeader = document.querySelector('header.site');
   let headerCompact = false;
